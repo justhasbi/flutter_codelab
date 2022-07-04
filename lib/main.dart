@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_codelab/main_screen.dart';
+// import 'package:flutter_codelab/model/tourism_place.dart';
 // import 'package:flutter_codelab/responsive_layout.dart';
 // import 'package:flutter_codelab/layout_builder.dart';
 // import 'package:flutter_codelab/media_query.dart';

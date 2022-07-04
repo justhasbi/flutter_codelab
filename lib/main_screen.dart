@@ -8,19 +8,25 @@ class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(
-              "Wisata Kota Bandung. Size: ${MediaQuery.of(context).size.width}"),
-        ),
-        body: LayoutBuilder(
-          builder: (BuildContext context, BoxConstraints constraints) {
-            if (constraints.maxWidth <= 600) {
-              return const TourismPlaceList();
-            } else {
-              return const TuorismPlaceGrid();
-            }
-          },
-        ));
+      appBar: AppBar(
+        title: const Text("Wisata Kota Bandung"),
+      ),
+      body: LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints constraints) {
+          if (constraints.maxWidth <= 600) {
+            return const TourismPlaceList();
+          } else if (constraints.maxWidth <= 1200) {
+            return const TuorismPlaceGrid(
+              gridCount: 4,
+            );
+          } else {
+            return const TuorismPlaceGrid(
+              gridCount: 6,
+            );
+          }
+        },
+      ),
+    );
   }
 }
 
@@ -77,53 +83,60 @@ class TourismPlaceList extends StatelessWidget {
 }
 
 class TuorismPlaceGrid extends StatelessWidget {
-  const TuorismPlaceGrid({Key? key}) : super(key: key);
+  final int gridCount;
+
+  const TuorismPlaceGrid({Key? key, required this.gridCount}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(24.0),
-      child: GridView.count(
-        crossAxisCount: 4,
-        children: tourismPlaceList.map((place) {
-          return InkWell(
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return DetailScreen(place: place);
-              }));
-            },
-            child: Card(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Expanded(
-                    child: Image.asset(
-                      place.imageAsset,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 8.0),
-                    child: Text(
-                      place.name,
-                      style: const TextStyle(
-                        fontSize: 16.0,
-                        fontWeight: FontWeight.bold,
+    return Scrollbar(
+      thumbVisibility: true,
+      child: Padding(
+        padding: const EdgeInsets.all(24.0),
+        child: GridView.count(
+          crossAxisCount: gridCount,
+          crossAxisSpacing: 16,
+          mainAxisSpacing: 16,
+          children: tourismPlaceList.map((place) {
+            return InkWell(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return DetailScreen(place: place);
+                }));
+              },
+              child: Card(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Expanded(
+                      child: Image.asset(
+                        place.imageAsset,
+                        fit: BoxFit.cover,
                       ),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 8.0, bottom: 8.0),
-                    child: Text(
-                      place.location,
+                    const SizedBox(height: 8),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 8.0),
+                      child: Text(
+                        place.name,
+                        style: const TextStyle(
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ),
-                  ),
-                ],
+                    Padding(
+                      padding: const EdgeInsets.only(left: 8.0, bottom: 8.0),
+                      child: Text(
+                        place.location,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          );
-        }).toList(),
+            );
+          }).toList(),
+        ),
       ),
     );
   }
