@@ -47,12 +47,14 @@ class LayoutBuilderPage extends StatelessWidget {
                     children: [
                       Text(
                         'MediaQuery: ${screenSize.width.toStringAsFixed(2)}',
-                        style: TextStyle(color: Colors.blueGrey, fontSize: 18),
+                        style: const TextStyle(
+                            color: Colors.blueGrey, fontSize: 18),
                         textAlign: TextAlign.center,
                       ),
                       Text(
                         'LayoutBuilder: ${constraints.maxWidth}',
-                        style: TextStyle(color: Colors.blueGrey, fontSize: 18),
+                        style: const TextStyle(
+                            color: Colors.blueGrey, fontSize: 18),
                         textAlign: TextAlign.center,
                       ),
                     ],

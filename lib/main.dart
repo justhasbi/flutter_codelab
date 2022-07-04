@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_codelab/responsive_layout.dart';
+import 'package:flutter_codelab/main_screen.dart';
+// import 'package:flutter_codelab/responsive_layout.dart';
 // import 'package:flutter_codelab/layout_builder.dart';
 // import 'package:flutter_codelab/media_query.dart';
 // import 'package:flutter_codelab/navigation_example.dart';
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Wisata Bandung',
       theme: ThemeData(),
-      home: const ResponsiveLayout(),
+      home: const MainScreen(),
     );
   }
 }
